@@ -16,10 +16,15 @@ echo " --- nc.conf ---"
 cat "$CONFIGDIR/nc.conf" | grep -v '^#' | grep -v '^$'
 echo ""
 
+
+UNIX_TIMESTAMP=$(date +%s)
+
 echo 
 echo "INFO: Starting AsterixDB cluster..."
 "$BINDIR/asterixncservice" -logdir - -config-file "$CONFIGDIR/nc.conf" >> "$LOGSDIR/nc.log" 2>&1 &
 "$BINDIR/asterixcc" -config-file "$CONFIGDIR/cc.conf" >> "$LOGSDIR/cc.log" 2>&1 &
 "$BINDIR/asterixhelper" wait_for_cluster -timeout 90 &
+iotop -Pabotqk > $LOGSDIR/network/iotop_$UNIX_TIMESTAMP.log &
+echo "I/O metrics are being written to $LOGSDIR/network/iotop.log" &
 echo "INFO: AsterixDB cluster started. Logs are being written to $LOGSDIR" &
 tail -f "$LOGSDIR/nc.log" "$LOGSDIR/nc-asterix_nc1.log";

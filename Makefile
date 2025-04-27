@@ -6,16 +6,15 @@ all: rebuild
 	docker exec -it --privileged spatial-lsm-tree-benchmark-db iotop -oPa
 
 rebuild:
-	@echo "Starting rebuild in the background..."
 	docker compose down
 	docker compose build
-	docker compose up -d &
+	docker compose up
 
 iotop:
-	docker exec -it --privileged data-gen-db-1 iotop -oPa
+	docker exec -it --privileged spatial-lsm-tree-benchmark-db iotop -oPa
 
 shell:
-	docker exec -it data-gen-db-1 bash
+	docker exec -it --privileged spatial-lsm-tree-benchmark-db bash
 
 tail:
 	@latest_file=$$(ls -t ./logs | head -n1); \

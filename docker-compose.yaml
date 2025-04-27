@@ -1,6 +1,7 @@
 services:
   db:
     container_name: spatial-lsm-tree-benchmark-db
+    privileged: true
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,3 +12,4 @@ services:
       - "20000-20005:20000-20005"
     volumes:
       - ./data:/opt/asterixdb/datasets
+      - ./logs/network:/opt/asterixdb/logs/network
