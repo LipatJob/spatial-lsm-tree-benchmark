@@ -19,17 +19,12 @@ RUN wget https://dlcdn.apache.org/asterixdb/asterixdb-${ASTERIXDB_VERSION}/aster
 # Expose necessary ports
 EXPOSE 19001 19002 19006 20000-20005
 
-COPY ./config/cc.conf /opt/asterixdb/opt/local/conf/cc.conf
+COPY ./config/cc.conf /opt/asterixdb/config/cc.conf
+COPY ./config/nc.conf /opt/asterixdb/config/nc.conf
+
+COPY ./config/start.sh /opt/asterixdb/start.sh
 
 # Set working directory
-WORKDIR /opt/asterixdb/opt/local/bin
+WORKDIR /opt/asterixdb
 
-RUN touch ./start-server.sh \
-    && chmod +x ./start-server.sh \
-    && echo '#!/bin/bash' > ./start-server.sh \
-    && echo "Starting AsterixDB version ${ASTERIXDB_VERSION}" >> ./start-server.sh \
-    && echo 'cd /opt/asterixdb/opt/local/bin' >> ./start-server.sh \
-    && echo './start-sample-cluster.sh' >> ./start-server.sh \
-    && echo 'tail -f /opt/asterixdb/opt/local/logs/nc-asterix_nc1.log & tail -f /opt/asterixdb/opt/local/logs/nc-asterix_nc2.log' >> ./start-server.sh
-
-ENTRYPOINT ["./start-server.sh"]
+ENTRYPOINT ["./start.sh"]
