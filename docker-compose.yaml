@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: spatial-lsm-tree-benchmark-db
     build:
       context: .
       dockerfile: Dockerfile
