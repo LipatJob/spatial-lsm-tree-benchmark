@@ -35,7 +35,7 @@ NCPID=$(ps aux | grep "[a]sterixcc" | awk '{print $2}')
 mkdir "$LOGSDIR/disk"
 while true; do
   echo "---"
-  echo "Time: $(date "+%Y-%m-%d %H:%M:%S")"
+  echo "timestamp: $(date +%s)"
   cat "/proc/$NCPID/io"
   sleep 1
 done >> "$LOGSDIR/disk/disk_cc_$UNIX_TIMESTAMP.log" &
