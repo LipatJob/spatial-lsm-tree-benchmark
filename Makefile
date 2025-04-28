@@ -17,6 +17,11 @@ shell:
 	docker exec -it --privileged spatial-lsm-tree-benchmark-db bash
 
 tail:
-	@latest_file=$$(ls -t ./logs | head -n1); \
+	@latest_file=$$(ls -t ./logs/benchmark | head -n1); \
 	echo "Latest log file: $$latest_file"; \
 	tail -f "./logs/$$latest_file"
+
+tail-network:
+	@latest_file=$$(ls -t ./logs/network | head -n1); \
+	echo "Latest log file: $$latest_file"; \
+	tail -f "./logs/network/$$latest_file"
