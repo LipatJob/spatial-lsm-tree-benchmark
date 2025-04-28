@@ -45,6 +45,3 @@ WITH {
     }
 };
 CREATE INDEX Locations_RTree_CorrelatedPrefix_Index on Locations_RTree_CorrelatedPrefix(location) TYPE rtree;
-
-CREATE DATASET Locations_BTree(LocationType) PRIMARY KEY id;
-CREATE INDEX Locations_BTree_Constant on Locations_BTree(location) TYPE btree;
