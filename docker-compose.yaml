@@ -13,3 +13,4 @@ services:
     volumes:
       - ./data:/opt/asterixdb/datasets
       - ./logs/network:/opt/asterixdb/logs/network
+      - ./logs/disk:/opt/asterixdb/logs/disk

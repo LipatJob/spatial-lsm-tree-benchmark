@@ -20,6 +20,11 @@ tail:
 	echo "Latest log file: $$latest_file"; \
 	tail -f "./logs/benchmark/$$latest_file"
 
+tail-disk:
+	@latest_file=$$(ls -t ./logs/disk | head -n1); \
+	echo "Latest log file: $$latest_file"; \
+	tail -f "./logs/disk/$$latest_file"
+
 monitor:
 	- tmux kill-session -t monitor-session || true
 	tmux new-session -d -s monitor-session 'make iotop' \; \
